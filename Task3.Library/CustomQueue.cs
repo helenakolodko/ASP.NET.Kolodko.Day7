@@ -13,11 +13,11 @@ namespace Task3.Library
         private int capacity = 16;
 
         public CustomQueue(IEnumerable<T> collection)
-            : base(collection.ToArray())
+            : this(collection.ToArray())
         { }
 
         public CustomQueue(T[] collection) : 
-            base(collection.Length)
+            this(collection.Length)
         { 
             count = capacity;
             Array.Copy(collection, items, capacity);
