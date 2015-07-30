@@ -33,6 +33,7 @@ namespace Task3.Library
             this.capacity = capacity;
             items = new T[capacity];
         }
+
         public void Enqueue(T item)
         {
             if (count + start >= capacity)
