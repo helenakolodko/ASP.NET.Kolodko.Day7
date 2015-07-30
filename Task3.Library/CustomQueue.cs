@@ -72,10 +72,12 @@ namespace Task3.Library
         
         private void ExpandItemsArray()
         {
-            if (start < count)
+            if (start < count || count >= capacity)
                 capacity *= 2;
             T[] temp = new T[capacity];
             Array.Copy(items, start, temp, 0, count);
+            items = temp;
+            start = 0;
         }
 
         private class Enumerator<T> : IEnumerator<T>
@@ -109,7 +111,8 @@ namespace Task3.Library
 
             public bool MoveNext()
             {
-                return ++currentIndex < queue.capacity;
+                currentIndex++;
+                return currentIndex - queue.start < queue.count;
             }
 
             public void Reset()

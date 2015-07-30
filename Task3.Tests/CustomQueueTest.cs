@@ -85,6 +85,47 @@ namespace Task3.Tests
                  StructuralComparisons.StructuralEqualityComparer));
         }
 
+        [TestMethod]
+        public void Enqueue_TwentyElemets_ExpandsQueue()
+        {
+            CustomQueue<int> queue = new CustomQueue<int>();
+            int[] expected = new int[20];
+            for (int i = 0; i < 20; i++)
+            {
+                queue.Enqueue(i);
+                expected[i] = i;
+            }
+
+            int[] enumeration = new int[20];
+            int j = 0;
+            foreach (var item in queue)
+                enumeration[j++] = item;
+
+            Assert.IsTrue(((IStructuralEquatable)enumeration).Equals(expected,
+                 StructuralComparisons.StructuralEqualityComparer));
+        }
+
+        [TestMethod]
+        public void Enqueue_SevenTimesAfterDequeueTenTimes_WorksRight()
+        {
+            CustomQueue<int> queue = new CustomQueue<int>();
+            for (int i = 0; i < 10; i++)
+                queue.Enqueue(i);
+            for (int i = 0; i < 10; i++)
+                queue.Dequeue();
+            for (int i = 0; i < 7; i++)
+                queue.Enqueue(i);
+
+            int[] enumeration = new int[7];
+            int j = 0;
+            foreach (var item in queue)
+            {
+                enumeration[j++] = item;
+            }
+
+            Assert.IsTrue(((IStructuralEquatable)enumeration).Equals(new int[] { 0, 1, 2, 3, 4, 5, 6 },
+                 StructuralComparisons.StructuralEqualityComparer));
+        }
 
     }
 }
