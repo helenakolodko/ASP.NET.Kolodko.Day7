@@ -26,10 +26,19 @@ namespace Task4.Tests
         }
 
         [TestMethod]
-        public void BinarySearch_OnNonSortedIntArray_DoesntFindsPresentElement()
+        public void BinarySearch_OnNonSortedIntArray_DoesntFindPresentElement()
         {
             int[] array = { 1, 13, 5, 19, 11, 3, 54 };
             int index = array.BinarySearch(3, (a, b) => a.CompareTo(b));
+
+            Assert.IsTrue(index < 0);
+        }
+
+        [TestMethod]
+        public void BinarySearch_OnSortedIntArrayNoComparisonProvided_FindsPresentElement()
+        {
+            int[] array = { 1, 13, 5, 19, 11, 3, 54 };
+            int index = array.BinarySearch(3);
 
             Assert.IsTrue(index < 0);
         }
